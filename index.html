@@ -1,129 +1,586 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnsorMed</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="shortcut icon" href="./img/logo-icon.jpg" type="image/x-icon">
+    <title>AnsorMed - Tabiiy Davolash</title>
+    <link rel="shortcut icon"
+        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZT4oErPBqBJjVxizE7gPdsxDrgZ0rUoyUQw&s"
+        type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            width: 100%;
+            padding: 15px 40px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .brand h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .navBtn {
+            padding: 12px 20px;
+            background-color: transparent;
+            border: 2px solid transparent;
+            color: #2c3e50;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .navBtn:hover {
+            background-color: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .navBtn.primary {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: 2px solid #e74c3c;
+        }
+
+        .navBtn.primary:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .services-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .services-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .services-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 2px;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            gap: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            align-items: center;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card:nth-child(even) {
+            grid-template-columns: 1fr 300px;
+        }
+
+        .service-card:nth-child(even) .service-content {
+            order: -1;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .service-content h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .service-content p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .service-btn {
+            margin: 60px auto;
+            display: block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .service-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid white;
+            color: white;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-btn:hover {
+            background: white;
+            color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .footer {
+            background-color: #2c3e50;
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .footer-logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid #34495e;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            background-color: #34495e;
+            border-color: #3498db;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-buttons {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .services-container {
+                padding: 0 20px;
+            }
+
+            .service-card,
+            .service-card:nth-child(even) {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .service-card:nth-child(even) .service-content {
+                order: 0;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .footer-nav {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .services-title {
+                font-size: 2rem;
+            }
+
+            .service-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .contact-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="brand">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZT4oErPBqBJjVxizE7gPdsxDrgZ0rUoyUQw&s" alt="Logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZT4oErPBqBJjVxizE7gPdsxDrgZ0rUoyUQw&s"
+                alt="AnsorMed Logo">
             <h1>AnsorMed</h1>
         </div>
-        <div class="buttons">
-            <a href="#pastda" class="navBtn">Xizmatlar</a>
-            <a href="#pastda" class="navBtn">Dorilar</a>
-            <a href="#pastda" class="navBtn">Asal</a>
-            <a href="#pastda" class="navBtn">Kontaktlar</a>
-            <a href="#pastda" class="navBtn">Blog</a>
-            <a href="#pastda" class="navBtn primary">Qabulga yozilish</a>
+        <div class="nav-buttons">
+            <a href="#services" class="navBtn">Xizmatlar</a>
+            <a href="#medicines" class="navBtn">Dorilar</a>
+            <a href="#honey" class="navBtn">Asal</a>
+            <a href="#contact" class="navBtn">Kontaktlar</a>
+            <a href="#blog" class="navBtn">Blog</a>
+            <a href="#contact" class="navBtn primary">Qabulga yozilish</a>
         </div>
+        <div class="hamburger" id="hamburger">☰</div>
+    </nav>
 
-    </div>
-    <div class="container">
-        <div class="about">
-            <h1 style="font-size: 35px;color: white;margin-top: 150px;">Tabiiy davolash usullari yordamida <br>
-                kasalliklardan xalos bo’ling.</h1>
-            <p style="font-size: 20px;color: white;margin-top: 10px;text-align: justify;">Hijoma, manual terapiya, zuluk
-                va turli tabiiy giyohlar eng <br> ko’p uchraydigan kasalliklarni yengishda
-                yordam beradi. <br> Sog’ligingizni o’z ishining professionallariga ishonib <br> topshiring.</p>
-
-            <button class="resive">Qabulga
-                yozilish</button>
-        </div>
-        <img src="./img/hero-img@2x.png" alt="" style="width: 500px;margin-top: 30px;object-fit: cover;height: 600px;">
-    </div>
-    <h1 style="text-align: center;margin-top: 90px;font-size: 40px;">Xizmatlar</h1>
-    <br><br>
-    <div class="services">
-        <div class="service">
-            <img src="./img/hijama@2x.jpg" alt=""
-                style="width: 250px;object-fit: contain;box-shadow: 1px 1px 10px 3px #bdbbbb;border-radius: 30px;">
-            <div>
-                <h2 style="font-size:25px;margin-top: 35px;">Hijoma</h2>
-                <p style="margin-top: 25px;color: #555;">Imom Termiziy Abdulloh ibn Abbos raziyallohu anhumodan rivoyat
-                    qilgan <br> hadisda rasululloh
-                    sallallohu
-                    alayhi va sallam dedilar: «Sizlar hijoma qiladigan <br> kunlaringizning eng yaxshisi 17, 19 va
-                    21-kunlardir»
-                    (bu kunlar hijrij-kamariy <br> hisobdagi oylar kunlaridir).</p>
-
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Tabiiy davolash usullari yordamida kasalliklardan xalos bo'ling</h1>
+                <p>Hijoma, manual terapiya, zuluk va turli tabiiy giyohlar eng ko'p uchraydigan kasalliklarni yengishda
+                    yordam beradi. Sog'ligingizni o'z ishining professionallariga ishonib topshiring.</p>
+                <button class="hero-btn" onclick="scrollToSection('contact')">Qabulga yozilish</button>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=500&h=400&fit=crop"
+                    alt="Tabiiy davolash"
+                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDUwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjZjhmOWZhIi8+Cjx0ZXh0IHg9IjI1MCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY3Ij5UYWJpaXkgRGF2b2xhc2g8L3RleHQ+Cjwvc3ZnPg=='">
             </div>
         </div>
-        <div class="service">
-            <img src="./img/manual-therapy.jpg" alt=""
-                style="width: 250px;object-fit: contain;box-shadow: 1px 1px 10px 3px #bdbbbb;border-radius: 30px;">
-            <div>
-                <h2 style="font-size:25px;margin-top: 35px;">Manual terapiya</h2>
-                <p style="margin-top: 25px;color: #555;">Manual terapiya Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Nulla <br> ac metus placerat, pellentesque enim ac, rhoncus lectus. Maecenas et
-                    posuere <br>
-                    lorem. Fusce sed massa sit amet elit viverra hendrerit.</p>
+    </section>
 
+    <section class="services-section" id="services">
+        <h2 class="services-title">Bizning Xizmatlar</h2>
+        <div class="services-container">
+            <div class="service-card">
+                <img src="./img/hijama@2x.jpg" alt="Hijoma"
+                    class="service-image"
+                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDMwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjZWVmMmY1Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY3Ij5IaWpvbWE8L3RleHQ+Cjwvc3ZnPg=='">
+                <div class="service-content">
+                    <h3>Hijoma</h3>
+                    <p>Imom Termiziy Abdulloh ibn Abbos raziyallohu anhumodan rivoyat qilgan hadisda rasululloh
+                        sallallohu alayhi va sallam dedilar: "Sizlar hijoma qiladigan kunlaringizning eng yaxshisi 17,
+                        19 va 21-kunlardir" (bu kunlar hijrij-kamariy hisobdagi oylar kunlaridir). Hijoma zamonaviy
+                        tibbiyotda ham o'z samaradorligini isbotlagan qadimiy davolash usulidir.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="./img/manual-therapy.jpg" alt="Manual terapiya" class="service-image"
+                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDMwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjZWVmMmY1Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY3Ij5NYW51YWwgVGVyYXBpeWE8L3RleHQ+Cjwvc3ZnPg=='">
+                <div class="service-content">
+                    <h3>Manual Terapiya</h3>
+                    <p>Manual terapiya - bu qo'llar yordamida amalga oshiriladigan davolash usuli bo'lib, mushak-skelet
+                        tizimining kasalliklarini davolashda yuqori samaradorlik ko'rsatadi. Bu usul orqa miya, bo'yin,
+                        bel og'riqlarini kamaytirish hamda umumiy sog'liqni yaxshilashda yordam beradi.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="./img/therapy-byzuluk.jpg" alt="Zuluk bilan davolash" class="service-image"
+                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDMwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjZWVmMmY1Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY3Ij5adWx1ayBEYXZvbGFzaGk8L3RleHQ+Cjwvc3ZnPg=='">
+                <div class="service-content">
+                    <h3>Zuluk bilan Davolash</h3>
+                    <p>Girudoterapiya (lot. hirūdō — "zuluk" va qad. yun. θεραπεία — "davolash") — ma'lum kasalliklarni
+                        dorivor zuluklar (Hirudo medicinalis) yordamida davolash usuli. Bu usul qon aylanishini
+                        yaxshilash, yallig'lanishni kamaytirish va organizmni tozalashda samarali hisoblanadi.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="./img/natural.jpg" alt="Tabiiy dori vositalari" class="service-image"
+                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDMwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjZWVmMmY1Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY3Ij5UYWJpaXkgRG9yaWxhcjwvdGV4dD4KPC9zdmc+'">
+                <div class="service-content">
+                    <h3>Tabiiy Dori Vositalari</h3>
+                    <p>Tabiiy o'simlik va giyohlardan tayyorlangan dori vositalar organizmga yumshoq ta'sir ko'rsatadi
+                        va yon ta'sirlari kam. Biz faqat sifatli va tekshirilgan tabiiy mahsulotlardan foydalanib, har
+                        bir mijozning individual ehtiyojlariga mos ravishda davolash rejasini tuzamiz.</p>
+                </div>
             </div>
         </div>
-        <div class="service">
-            <img src="./img/therapy-byzuluk.jpg" alt=""
-                style="width: 250px;object-fit: contain;box-shadow: 1px 1px 10px 3px #bdbbbb;border-radius: 30px;">
-            <div>
-                <h2 style="font-size:25px;margin-top: 35px;">Zuluk bilan davolash</h2>
-                <p style="margin-top: 25px;color: #555;">Girudoterapiya (lot. hirūdō — «zuluk» va qad. yun. θεραπεία —
-                    «davolash») — <br> ma’lum kasalliklarni dorivor zuluklar (Hirudo medicinalis) yordamida davolash
-                    <br> usuli.
-                    Fizioterapevtik muolaja, muqobil tibbiyotga oid sanaladi. Bunday zuluklar <br> ushbu kichik sinf
-                    chuvchalchanglariga oid yagona tur hisoblanadi, qolganlari <br> shifobaxsh ta’sir ko’rsatmaydi.
-                </p>
+        <button class="service-btn" onclick="scrollToSection('contact')">Qabulga yozilish</button>
+    </section>
 
-            </div>
+    <section class="contact-section" id="contact">
+        <h2 class="contact-title">Qabulga ro'yxatdan o'ting</h2>
+        <div class="contact-buttons">
+            <a href="tel:+998901234567" class="contact-btn">📞 Qo'ng'iroq qilish</a>
+            <a href="https://t.me/omadbek_tuxtasinboyev_1709" class="contact-btn" target="_blank">💬 Telegramdan
+                yozish</a>
         </div>
-        <div class="service">
-            <img src="./img/natural.jpg" alt=""
-                style="width: 250px;object-fit: contain;box-shadow: 1px 1px 10px 3px #bdbbbb;border-radius: 30px;">
-            <div>
-                <h2 style="font-size:25px;margin-top: 35px;">Tabiiy dori vositalari</h2>
-                <p style="margin-top: 25px;color: #555;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                    ac metus placerat, <br> pellentesque enim ac, rhoncus lectus. Maecenas et posuere lorem. Fusce sed
-                    <br> massa
-                    sit amet elit viverra hendrerit.
-                </p>
+    </section>
 
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZT4oErPBqBJjVxizE7gPdsxDrgZ0rUoyUQw&s"
+                    alt="AnsorMed Logo">
+                <h2>AnsorMed</h2>
             </div>
-        </div>
-    </div>
-    <br>
-    <button class="Qabulga">Qabulga yozilish</button>
-    <br><br><br>
-    <div class="connection">
-        <h1 style="font-size: 40px;color: white;margin-top: 70px;">Qabulga ro’yxatdan o’ting</h1>
-        <button class="contact1">Qong'iroq qilish</button>
-        <button class="contact2"><a href="https://t.me/omadbek_tuxtasinboyev_1709" style="text-decoration: none;color: white;">Telegramdan yozish</a></button>
-    </div>
-    <footer
-        style="width: 100%; background-color: rgb(26, 25, 25); height: 100px;display: flex;align-items: center;justify-content: space-around;">
-        <div class="footer-logo">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZT4oErPBqBJjVxizE7gPdsxDrgZ0rUoyUQw&s" alt="Logo">
-            <h1>AnsorMed</h1>
-        </div>
-        <div class="footer-nav">
-            <button class="footer-link" id="pastda"><a href="#boshSahifa" c
-                    style="color: white;text-decoration: none;scroll-behavior: smooth;">Xizmatlar</a></button>
-            <button class="footer-link"><a href="#boshSahifa" c
-                    style="color: white;text-decoration: none;scroll-behavior: smooth;">Dorilar</a></button>
-            <button class="footer-link"><a href="#boshSahifa" c
-                    style="color: white;text-decoration: none;scroll-behavior: smooth;">Asal</a></button>
-            <button class="footer-link"><a href="#boshSahifa" c
-                    style="color: white;text-decoration: none;scroll-behavior: smooth;">Kontaktlar</a></button>
-            <button class="footer-link"><a href="#boshSahifa" c
-                    style="color: white;text-decoration: none;scroll-behavior: smooth;">Blog</a></button>
+            <div class="footer-nav">
+                <a href="#services" class="footer-link">Xizmatlar</a>
+                <a href="#medicines" class="footer-link">Dorilar</a>
+                <a href="#honey" class="footer-link">Asal</a>
+                <a href="#contact" class="footer-link">Kontaktlar</a>
+                <a href="#blog" class="footer-link">Blog</a>
+            </div>
         </div>
     </footer>
 
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        document.getElementById('hamburger').addEventListener('click', function () {
+            alert('Mobil menyu ishga tushirildi. Bu funksiyani keyinroq to\'liq ishlab chiqish mumkin.');
+        });
+
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = '#ffffff';
+                navbar.style.backdropFilter = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('load', function () {
+                    this.style.opacity = '0';
+                    this.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        this.style.transition = 'all 0.5s ease';
+                        this.style.opacity = '1';
+                        this.style.transform = 'scale(1)';
+                    }, 100);
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
